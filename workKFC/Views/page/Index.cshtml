@@ -1,0 +1,34 @@
+﻿@using X.PagedList.Mvc.Core
+@using X.PagedList
+@model IPagedList<workKFC.Models.meals>
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    ViewBag.Title = "麥當當餐點";
+}
+<link href="~/css/PagedList.css" rel="stylesheet" />
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4">
+            <div class="thumbnail">
+                <img src="~/images/@item.img" style="width:50%">
+                <div class="caption">
+
+                    <h2>@item.title</h2>
+                    <p>單價：@item.price</p>
+                    @if (HttpContextAccessor.HttpContext.Session.GetString("account") == null)
+                    {
+                        <p></p>
+                    }
+                    else
+                    {
+                        <p><a href="@Url.Action("AddCar")?mNum=@item.num" class="btn btn-primary">加入購物車</a></p>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@Html.PagedListPager(Model, page => Url.Action("Index", "Page", new { page }))
+

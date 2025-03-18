@@ -1,0 +1,26 @@
+﻿@model IEnumerable<workKFC.Models.meals>
+
+@{
+    ViewData["Title"] = "肯德基點餐--後台首頁";
+    Layout = "~/Views/Shared/_LayoutBack.cshtml";
+}
+
+<h1>肯德基點餐--後台首頁</h1>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4">
+            <div class="thumbnail">
+                <img src="~/images/@item.img" style="width:70%">
+                <div class="caption">
+                    <h2>@item.title</h2>
+                    <p>單價：@item.price</p>
+                    <p>
+                        <a href="@Url.Action("Edit")?id=@item.num" class="btn btn-primary">修改</a>
+                        <a href="@Url.Action("Delete")?id=@item.num" class="btn btn-primary" onclick="return confirm('確定刪除嗎？');">刪除</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

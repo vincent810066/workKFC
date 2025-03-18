@@ -1,0 +1,80 @@
+﻿@model IEnumerable<workKFC.Models.orders>
+@{
+    ViewData["Title"] = "showCar";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+
+<h1>訂單</h1>
+<table class="table table-bordered" >
+    <thead>
+        <tr>
+            <th>圖片</th>
+            <th>
+                @Html.DisplayNameFor(model => model.ordersnum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.account)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.orderdate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mealnum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mealtitle)
+            </th>
+                        <th>
+                @Html.DisplayNameFor(model => model.qty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.total)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+<img src="~/images/@{
+@Html.DisplayFor(modelItem => item.mealnum)
+}.jpg" width="50%"  />
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ordersnum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.account)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.orderdate)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mealnum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mealtitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.qty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.total)
+                </td>
+                <td>
+                    <a href="@Url.Action("Delete")?mNum=@item.mealnum" onclick="return confirm('確定刪除嗎？');" class="btn btn-warning">刪除</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<hr />
+<h3>總計:@ViewBag.sum</h3>
+

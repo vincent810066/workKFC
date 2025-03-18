@@ -1,0 +1,40 @@
+﻿@model workKFC.Models.meals
+
+@{
+    ViewData["Title"] = "修改";
+    Layout = "~/Views/Shared/_LayoutBack.cshtml";
+}
+
+<h1>修改</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+     <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="num" />
+            <div class="form-group">
+                <label asp-for="title" class="control-label"></label>
+                <input asp-for="title" class="form-control"  value="@ViewBag.name" />
+                <span asp-validation-for="title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="price" class="control-label"></label>
+                <input asp-for="price" class="form-control" value="@ViewBag.price" />
+                <span asp-validation-for="price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                圖片(沒有傳以舊圖為主):
+                <p><input type="file" name="photo" id="photo" value="@ViewBag.img" /></p>
+            </div>
+            <p>&nbsp;</p>
+            <div class="form-group">
+                <input type="submit" value="修改" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">回首頁</a>
+</div>

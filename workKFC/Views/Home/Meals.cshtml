@@ -1,0 +1,20 @@
+﻿@model IEnumerable<workKFC.Models.meals>
+@{
+    ViewData["Title"] = "麥當當餐點";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4">
+            <div class="thumbnail">
+                <img src="~/images/@item.img" style="width:70%">
+                <div class="caption">
+                    <h2>@item.title</h2>
+                    <p>單價：@item.price</p>
+                    <p><a href="@Url.Action("AddCar")?mNum=@item.num" class="btn btn-primary">加入購物車</a></p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,46 @@
+﻿@inject IHttpContextAccessor HttpContextAccessor
+@model IEnumerable<workKFC.Models.meals>
+@{
+    ViewData["Title"] = "麥當當餐點";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>麥當當餐點</h1>
+
+<div class="row">
+    <p></p>
+    <div style="font-size:x-large">
+        <form method="post" action="@Url.Action("Index","Type")">
+            <select name="id">
+                <option value="1">套餐</option>
+                <option value="2">蛋塔盒裝</option>
+                <option value="3">桶餐</option>
+                <option value="3">飲料點心</option>
+            </select>
+            <input type="submit" value="查詢" />
+        </form>
+    </div>
+    <p></p>
+    <h2>@ViewBag.name</h2>
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4">
+            <div class="thumbnail">
+                <img src="~/images/@item.img" style="width:50%">
+                <div class="caption">
+                    <h2>@item.title</h2>
+                    <p>單價：@item.price</p>
+                    @if (HttpContextAccessor.HttpContext.Session.GetString("account") == null)
+                    {
+                        <p></p>
+                    }
+                    else
+                    {
+                        <p><a href="@Url.Action("AddCar")?mNum=@item.num" class="btn btn-primary">加入購物車</a></p>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
